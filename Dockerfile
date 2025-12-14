@@ -29,5 +29,4 @@ COPY . .
 # 7️⃣ Create input & output folders (safe default)
 RUN mkdir -p /app/input /app/output
 
-# 8️⃣ Default command (CLI help)
-CMD ["python", "run_pipeline.py", "--help"]
+ENTRYPOINT ["python", "run_pipeline.py"]

@@ -81,8 +81,70 @@ The pipeline expects an Excel file containing at least the following columns:
 ⚙️ INSTALLATION AND PIPELINE RUNNING GUIDELINES 
 
 WE HAVE PROVIDED TWO WAYS TO RUN THE PIPELINE
-                            |__ Running the Pipeline (CLI Mode)(Command line interface)
                             |__ Running with Docker
+                            |__ Running the Pipeline (CLI Mode)(Command line interface)
+
+**RUNNING THE PIPELINE WITH DOCKER (RECOMMENDED)**
+**A pre-built Docker image is already available on Docker Hub.**
+
+### Docker Image
+
+Docker Image:
+vishalvetcha/solar-rooftop-pv-pipeline:latest
+
+**Docker Hub Repository:**  
+vishalvetcha/solar-rooftop-pv-pipeline
+
+**Image Tag:**  
+latest
+
+**FOLLOW THE GUIDELINES STEP BY STEP**
+
+1) Step 1 — Pull the Docker Image
+
+run this command:
+
+docker pull vishalvetcha/solar-rooftop-pv-pipeline:latest
+
+2) Step 2 — Run the Pipeline Using Docker
+Mount:
+A local folder containing your Excel input file
+The repository’s output/ folder (results are written automatically)
+
+run this command: 
+
+docker run --rm \
+  -v <REPLACE WITH PATH_TO_FOLDER_CONTAINING_EXCEL>:/app/input \
+  -v $(pwd)/output:/app/output \
+  vishalvetcha/solar-rooftop-pv-pipeline:latest \
+  python run_pipeline.py --input /app/input/<REPLACE WITH YOUR_EXCEL_FILENAME>.xlsx
+
+**IMPORTANT** 
+1) Replace <REPLACE WITH PATH_TO_FOLDER_CONTAINING_EXCEL> with the folder containing your Excel file
+2) Replace <REPLACE WITH YOUR_EXCEL_FILENAME> with the file name of the excel sheet
+
+Example Command (JUST AN EXAMPLE-REFER THE GUIDELINES AND ABOVE COMMANDS FOR PROCEDURE)
+docker run --rm \
+  -v /home/user/data:/app/input \
+  -v $(pwd)/output:/app/output \
+  vishalvetcha/solar-rooftop-pv-pipeline:latest \
+  python run_pipeline.py --input /app/input/sites.xlsx
+
+Important Notes for Evaluators
+
+The Excel file can be named anything
+Just ensure the filename matches what you pass to --input
+Outputs are always written to the repository’s output/ directory
+No additional configuration is required
+
+📂 **Output Location (Automatic)**
+
+After execution, results will be available at:
+
+output/
+├── json/
+├── overlays/
+└── logs/
 
 
 **RUNNING THE PIPELINE (CLI Mode)**
@@ -119,54 +181,6 @@ output/
 └── logs/        # Execution logs
 
 
-
-**RUNNING THE PIPELINE WITH DOCKER**
-Docker ensures a fully reproducible environment with no dependency conflicts.
-
-Step 1 — Build Docker Image
-
-command:
-docker build -t solar-pv-pipeline .
-
-Step 2 — Run Pipeline Using Docker
-
-docker run --rm \
-  -v <PATH_TO_FOLDER_CONTAINING_EXCEL>:/app/input \
-  -v $(pwd)/output:/app/output \
-  solar-pv-pipeline \
-  python run_pipeline.py \
-  --input /app/input/<REPLACE WITH YOUR_EXCEL_FILENAME>.xlsx
-
-
-EXAMPLE:(JUST AN EXAMPLE, RUN WITH CORRECT FILE PATH FOLLOWING ABOVE GUIDELINES)
-docker run --rm \
-  -v /home/user/data:/app/input \
-  -v $(pwd)/output:/app/output \
-  solar-pv-pipeline \
-  python run_pipeline.py \
-  --input /app/input/sites.xlsx
-
-
-
-**IMPORTANT** 
-1) Replace <REPLACE WITH FILE PATH CONTAINING THE EXCEL FILE> with the folder containing your Excel file
-2) Replace <REPLACE WITH YOUR_EXCEL_FILENAME> with the file name of the excel sheet
-
-Important Notes for Evaluators
-
-The Excel file can be named anything
-Just ensure the filename matches what you pass to --input
-Outputs are always written to the repository’s output/ directory
-No additional configuration is required
-
-📂 **Output Location (Automatic)**
-
-After execution, results will be available at:
-
-output/
-├── json/
-├── overlays/
-└── logs/
 
 **Training logs and metrics across epochs are provided under the `training_logs/` directory as a CSV file.**
 
