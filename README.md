@@ -31,6 +31,7 @@ WHAT THIS PIPELINE DOES?
 9) Stores outputs as JSON and images
 
 📂 Project Structure
+```text
 solar_rooftop_pv_pipeline/
 │
 ├── run_pipeline.py          # Main CLI entrypoint (this is what you run)
