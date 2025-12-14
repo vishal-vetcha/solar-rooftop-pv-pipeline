@@ -1,0 +1,68 @@
+# ===============================
+# Global Pipeline Settings
+# ===============================
+
+project_name: solar_rooftop_pv_pipeline
+environment: production
+
+# ===============================
+# Image Fetch Settings
+# ===============================
+
+image_source:
+  provider: ESRI
+  base_url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export"
+  image_size_px: 1024
+  format: png
+
+# Zoom levels to try (coarse → fine)
+zoom_levels:
+  - 18
+  - 19
+  - 20
+
+# ===============================
+# Buffer Logic (in sq.ft)
+# ===============================
+
+buffer_policy:
+  primary_buffer_sqft: 1200
+  fallback_buffer_sqft: 2400
+
+# ===============================
+# Inference Thresholds
+# ===============================
+
+inference:
+  min_confidence_verifiable: 0.25
+  min_mask_area_sqm: 1.0
+  max_detections: 50
+
+# ===============================
+# QC Rules
+# ===============================
+
+qc_rules:
+  verifiable_if_detected: true
+  not_verifiable_if:
+    - no_image
+    - no_detection
+    - very_low_confidence
+
+# ===============================
+# Output Settings
+# ===============================
+
+output:
+  save_json: true
+  save_overlay: true
+  overlay_alpha: 0.45
+  output_date_format: "%Y-%m-%d"
+
+# ===============================
+# Logging
+# ===============================
+
+logging:
+  level: INFO
+  save_logs: true

@@ -1,0 +1,58 @@
+# ===============================
+# Model Configuration
+# ===============================
+
+model:
+  name: solar_yolov8_seg
+  task: segment
+  framework: ultralytics
+  weights_path: models/solar_yolov8_seg.pt
+  device: cuda
+
+# ===============================
+# Input Settings
+# ===============================
+
+input:
+  image_size: 1024
+  channels: 3
+  normalize: true
+
+# ===============================
+# Classes
+# ===============================
+
+classes:
+  0:
+    name: solar_panel
+    color: [0, 255, 0]
+
+# ===============================
+# Inference Parameters
+# ===============================
+
+inference:
+  conf_threshold: 0.25
+  iou_threshold: 0.45
+  max_det: 50
+  retina_masks: true
+
+# ===============================
+# Area Estimation
+# ===============================
+
+area_estimation:
+  pixel_to_meter_scale:
+    method: zoom_based
+    meters_per_pixel_at_zoom:
+      18: 0.597
+      19: 0.298
+      20: 0.149
+
+# ===============================
+# Post Processing
+# ===============================
+
+postprocess:
+  merge_overlapping_masks: true
+  min_area_sqm: 1.0

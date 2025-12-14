@@ -1,0 +1,21 @@
+# Core
+numpy==1.26.4
+pandas==2.2.3
+pyyaml==6.0.2
+
+# Computer Vision
+opencv-python-headless==4.8.1.78
+Pillow==10.4.0
+shapely==2.0.6
+
+# Deep Learning
+torch==2.6.0
+torchvision==0.21.0
+ultralytics==8.3.237
+
+# Utilities
+requests==2.32.3
+tqdm==4.66.5
+
+# Optional (for future UI / debugging)
+matplotlib==3.8.4
