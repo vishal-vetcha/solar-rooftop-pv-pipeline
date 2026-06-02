@@ -1,11 +1,7 @@
 🏠 Solar Rooftop PV Detection Pipeline
 SOLAR ROOFTOP PV DETECTION PIPELINE
 
-TEAM NAME: NEURAL NOMADS
-TEAM MEMBERS:
-1) VISHAL VETCHA
-2) JYOTSNA MALLENA
-3) REZIE PAUL ILAVARAPU
+
 
 This repository provides a production-grade, end-to-end Python pipeline for detecting rooftop solar photovoltaic (PV) installations from satellite imagery using deep learning.
 The pipeline is designed to be robust, auditable, and evaluator-friendly, fully aligned with the problem statement requirements.
